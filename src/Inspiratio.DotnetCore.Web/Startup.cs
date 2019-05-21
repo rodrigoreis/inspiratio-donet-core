@@ -1,5 +1,4 @@
 ﻿using Inspiratio.DotnetCore.Web.Hubs;
-using Inspiratio.DotnetCore.Web.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +26,6 @@ namespace Inspiratio.DotnetCore.Web
         {
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
-            app.UseChromeBrowserCheck();
             app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/chat");
