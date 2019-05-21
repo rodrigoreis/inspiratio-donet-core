@@ -1,9 +1,12 @@
 ﻿using Inspiratio.DotnetCore.Web.Hubs;
+using Inspiratio.DotnetCore.Web.Middlewares;
+using Inspiratio.DotnetCore.Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Inspiratio.DotnetCore.Web
 {
@@ -18,6 +21,7 @@ namespace Inspiratio.DotnetCore.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.TryAddScoped<ISpellingCheckService, SpellingCheckService>();
             services.AddSignalR();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
@@ -26,6 +30,7 @@ namespace Inspiratio.DotnetCore.Web
         {
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
+            app.UseChromeBrowserCheck();
             app.UseSignalR(routes =>
             {
                 routes.MapHub<ChatHub>("/chat");
