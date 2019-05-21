@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Inspiratio.DotnetCore.Web.Hubs;
+using Inspiratio.DotnetCore.Web.Middlewares;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Inspiratio.DotnetCore.Api
+namespace Inspiratio.DotnetCore.Web
 {
     public class Startup
     {
@@ -17,14 +19,27 @@ namespace Inspiratio.DotnetCore.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseDeveloperExceptionPage();
-            app.UseHttpsRedirection();
+            app.UseStaticFiles();
+            app.UseChromeBrowserCheck();
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/chat");
+            });
             app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                    );
+            });
         }
     }
 }

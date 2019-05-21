@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Inspiratio.DotnetCore.Api
+namespace Inspiratio.DotnetCore.Web
 {
     public class Program
     {
