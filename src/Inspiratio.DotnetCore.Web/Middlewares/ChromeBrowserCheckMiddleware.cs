@@ -17,7 +17,7 @@ namespace Inspiratio.DotnetCore.Web.Middlewares
         {
             var userAgent = context.Request.Headers["User-Agent"].ToString();
 
-            if (!userAgent.ToLower().Contains("chrome"))
+            if (!userAgent.ToLower().Contains("chrome") || userAgent.ToLower().Contains("edge"))
             {
                 await context.Response.WriteAsync($"\"{userAgent}\" is no support for this application.");
             }
