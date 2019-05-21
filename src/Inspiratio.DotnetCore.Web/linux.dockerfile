@@ -4,7 +4,7 @@ COPY *.csproj ./
 RUN dotnet restore
 COPY . ./
 RUN dotnet publish -c Release -o out
-FROM microsoft/dotnet:aspnetcore-runtime
+FROM microsoft/dotnet:aspnetcore-runtime AS runtime-env
 WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "Inspiratio.DotnetCore.Web.dll"]
