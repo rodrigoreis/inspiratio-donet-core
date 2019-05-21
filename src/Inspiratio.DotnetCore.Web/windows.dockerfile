@@ -5,16 +5,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2-stretch AS build
 WORKDIR /src
-COPY ["src/Inspiratio.DotnetCore.Api/Inspiratio.DotnetCore.Api.csproj", "src/Inspiratio.DotnetCore.Api/"]
-RUN dotnet restore "src/Inspiratio.DotnetCore.Api/Inspiratio.DotnetCore.Api.csproj"
+COPY ["src/Inspiratio.DotnetCore.Web/Inspiratio.DotnetCore.Web.csproj", "src/Inspiratio.DotnetCore.Web/"]
+RUN dotnet restore "src/Inspiratio.DotnetCore.Web/Inspiratio.DotnetCore.Web.csproj"
 COPY . .
-WORKDIR "/src/src/Inspiratio.DotnetCore.Api"
-RUN dotnet build "Inspiratio.DotnetCore.Api.csproj" -c Release -o /app
+WORKDIR "/src/src/Inspiratio.DotnetCore.Web"
+RUN dotnet build "Inspiratio.DotnetCore.Web.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "Inspiratio.DotnetCore.Api.csproj" -c Release -o /app
+RUN dotnet publish "Inspiratio.DotnetCore.Web.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "Inspiratio.DotnetCore.Api.dll"]
+ENTRYPOINT ["dotnet", "Inspiratio.DotnetCore.Web.dll"]

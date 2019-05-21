@@ -6,6 +6,7 @@
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <UserSecretsId>9655c7fe-8fd9-431b-892c-512ff1beb2a7</UserSecretsId>
     <DockerDefaultDockerfile>windows.Dockerfile</DockerDefaultDockerfile>
+    <AssemblyName>Inspiratio.DotnetCore.Web</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

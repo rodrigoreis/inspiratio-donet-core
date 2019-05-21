@@ -29,7 +29,7 @@
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/api/values",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/chat/index",
       "httpPort": 2720,
       "useSSL": true,
       "sslPort": 44345
